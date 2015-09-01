@@ -1,18 +1,32 @@
 body {
-    background: #eee;
+    background-image: url('../images/wood_pattern.png');
     text-align: center;
     padding: 0 25px;
-    font-family: arial, sans-serif;
+    font-family: "Helvetica Neue", "Gerorgia", sans-serif;
+    font-weight: 200;
 }
 
 #main, #chats {
-    width: 500px;
+    width: 640px;
     margin: auto;
     text-align: left;
-    background: white;
+    background: rgba(255, 255, 255, 0.7);
     padding: 50px 60px;
     border: solid #ddd;
     border-width: 0 1px 1px 1px;
+
+
+
+}
+
+#main {
+    padding: 10px 60px;
+    border-bottom: none;
+}
+
+#chats {
+    border-top: none;
+    padding-top: 10px;
 }
 
 #main h1 {
@@ -20,6 +34,8 @@ body {
     font-size: 35px;
     margin-bottom: 5px;
     padding: 5px;
+    text-align: center;
+    letter-spacing: 0.1em;
 }
 
 #main h1 span {
@@ -60,13 +76,17 @@ form input[type=text] {
 }
 
 .chat {
-    padding: 5px;
-    margin-bottom: 5px;
-    background-color: #eee;
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    overflow: hidden;
+    border-radius: 5px;
 }
 
 .chat .username {
-    font-weight: 800;
+    font-weight: 500;
+    margin: 0;
 }
 
 .chat:hover {
@@ -81,4 +101,35 @@ form input[type=text] {
 
 .spinner img {
     padding: 10px;
+}
+
+.chatBoxThing {
+    width: 640px;
+}
+
+.room {
+    margin-bottom: 25px;
+}
+
+.room select {
+    margin: 7px;
+    background: #fff;
+    height: 2em;
+}
+
+.box {
+    width: 550px;
+    border-radius: 5px;
+}
+
+.box input[type="text"]{
+    width: 250px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+.box button {
+    background: #193441;
+    color: #fff;
+    border-radius: 5px;
 }
