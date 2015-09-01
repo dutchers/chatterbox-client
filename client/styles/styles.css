@@ -1,135 +1,59 @@
-body {
-    background-image: url('../images/wood_pattern.png');
-    text-align: center;
-    padding: 0 25px;
-    font-family: "Helvetica Neue", "Gerorgia", sans-serif;
-    font-weight: 200;
+::-webkit-scrollbar {
+    -webkit-appearance: none;
+    width: 7px;
+}
+::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background-color: rgba(0,0,0,.5);
+    -webkit-box-shadow: 0 0 1px rgba(255,255,255,.5);
 }
 
-#main, #chats {
-    width: 640px;
-    margin: auto;
-    text-align: left;
-    background: rgba(255, 255, 255, 0.7);
-    padding: 50px 60px;
-    border: solid #ddd;
-    border-width: 0 1px 1px 1px;
 
 
-
-}
-
-#main {
-    padding: 10px 60px;
-    border-bottom: none;
-}
-
-#chats {
-    border-top: none;
-    padding-top: 10px;
-}
-
-#main h1 {
-    margin-top: 0;
-    font-size: 35px;
-    margin-bottom: 5px;
-    padding: 5px;
-    text-align: center;
-    letter-spacing: 0.1em;
-}
-
-#main h1 span {
-    font-style:italic;
-}
-
-#main ul {
-    padding-left: 20px;
-}
-
-#main .error {
-    border: 1px solid red;
-    background: #FDEFF0;
-    padding: 20px;
-}
-
-#main .success {
+.clear {
     margin-top: 25px;
 }
 
-#main .success code {
-    font-size: 12px;
-    color: green;
-    line-height: 13px;
+.username {
+    font-weight: bold;
 }
 
-form {
-    padding: 20px;
-    padding-left: 0;
-    margin-bottom: 20px;
-}
-
-form input[type=text] {
-    margin-right: 10px;
-    width: 70%;
-    font-size: 12px;
-    padding: 5px;
+#chats {
+    height: 400px;
+    overflow-y: scroll;
+    margin-top: 50px;
+    border: 1px solid #eee;
+    padding: 25px;
 }
 
 .chat {
+    margin: 10px;
     padding: 10px;
-    margin-bottom: 10px;
-    background-color: #fff;
-    border: 1px solid #ccc;
-    overflow: hidden;
-    border-radius: 5px;
+    border-radius: 7px;
 }
 
-.chat .username {
-    font-weight: 500;
-    margin: 0;
+.chat:nth-child(even) {
+    background: #efefef;
 }
 
-.chat:hover {
-    background-color: #ddd;
+.username {
+    margin-right: 50px;
+    color: #555;
 }
 
-.spinner {
-    float: right;
-    height: 46px;
-    margin-bottom: 5px;
+.timeStamp {
+    color: #ccc;
 }
 
-.spinner img {
-    padding: 10px;
+.msg {
+    padding: 20px;
+    font-size: 24px;
 }
 
-.chatBoxThing {
-    width: 640px;
+.chat-box {
+    margin-top: 50px;
 }
 
-.room {
-    margin-bottom: 25px;
-}
-
-.room select {
-    margin: 7px;
-    background: #fff;
-    height: 2em;
-}
-
-.box {
-    width: 550px;
-    border-radius: 5px;
-}
-
-.box input[type="text"]{
-    width: 250px;
-    border: 1px solid #ccc;
-    border-radius: 3px;
-}
-
-.box button {
-    background: #193441;
-    color: #fff;
-    border-radius: 5px;
+.chat-box input[type="text"] {
+    width: 680px;
 }

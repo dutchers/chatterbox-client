@@ -3,7 +3,8 @@
   <head>
     <meta charset="utf-8">
     <title>chatterbox</title>
-    <link rel="stylesheet" href="styles/styles.css">
+    <link rel="stylesheet" type="text/css" href="styles/bootstrap.min.css">
+        <link rel="stylesheet" href="styles/styles.css">
 
     <!-- dependencies -->
     <script src="bower_components/jquery/dist/jquery.js"></script>
@@ -13,28 +14,46 @@
     <script src="scripts/app.js"></script>
   </head>
   <body>
-    <div id="main">
-      <h1>chatterbox</h1>
-      <div class="chatBoxThing">
-      <form>
-        <div class="room">
-          <label for="roomSelect">Room:</label>
-          <select id="roomSelect" name="roomSelect">
-            <option value="whatever">whatever</option>
-            <option value="blah">blah</option>
-          </select>
-          <button type="submit" id="roomAdder">Join!</button>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4">
+          <h1 class="page-header">chatterbox</h1>
         </div>
-        <div class="box">
-          
-          <input type="text" id="message" placeholder="hola!" />
-          <button type="submit" id="send">send</button>
-          <button type="submit" id="clearMessage">clear</button>
+        <div class="col-md-2 col-md-offset-6 clear">
+          <button type="submit" class="btn btn-default" id="clearMessage">
+          <span class="glyphicon glyphicon-remove"></span>
+          </button>
         </div>
-      </form>
       </div>
-    </div>
-    <div id="chats">
+      <div class="row">
+        <div class="col-md-6 col-md-offset-2">
+          <form class="form-inline">
+            <label for="roomSelect">Room:</label>
+            <div class="form-group">
+              <select class="form-control" id="roomSelect" name="roomSelect">
+                <option value="whatever">whatever</option>
+                <option value="blah">blah</option>
+              </select>
+              <button class="btn btn-default" type="submit" id="roomAdder">Join!</button>
+            </div>
+          </form>
+
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-8 col-md-offset-2" id="chats"></div>
+      </div>
+      <div class="row">
+        <div class="col-md-8 col-md-offset-2 chat-box">
+          <form class="form-inline">
+            <div class="form-group">
+              <input type="text" class="form-control" id="message" placeholder="hola!" />
+              <button type="submit" class="btn btn-default" id="send">send</button>
+            </div>
+          </form>
+        </div>
+      </div>
     </div>
   </body>
 </html>

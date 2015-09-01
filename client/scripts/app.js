@@ -24,7 +24,8 @@ app.init = function() {
       app.addFriend();
     });
     app.fetch();
-    app.send();
+    app.refresh();
+
 
 
   });
@@ -47,12 +48,6 @@ app.send = function() {
     return message;
   };
 
-  // var message = buildMessage();
-  // var message = {
-  //   username: 'Mel Brooks',
-  //   text: 'It\'s good to be the king',
-  //   roomname: 'lobby'
-  // };
   var message = buildMessage();
   $.ajax({
     // This is the url you should use to communicate with the parse API server.
@@ -64,37 +59,29 @@ app.send = function() {
       console.log('chatterbox: Message sent');
     },
     error: function(data) {
-      // See: https://developer.mozilla.org/en-US/docs/Web/API/console.error
       console.error('chatterbox: Failed to send message');
     }
   });
 
-  // setTimeout(app.send.bind(this), 1000);
 };
 
 app.clearMessages = function() {
   $('#chats').empty();
 };
 
-// app.addMessage = function(message) {
-//   $('#chats').append('<div class="chat"><p class="username">' + message.username + '</p><p>' + message.text + '</p></div>');
-// };
-
-// app.addFriend = function () {
-//   // body...
-// }
 
 app.addRoom = function(roomname) {
   $('#roomSelect').append('<option value="drunkWizards">Shazzaaam!</option>');
 };
 
 app.addMessage = function (results) {
-  for (var i = 0; i < results.length; i++) {
+  for (var i = 0; i < 20 ; i++) {
         var date = results[i].createdAt;
         var $message = $('<p></p>').text(results[i].text).html();
-        var username = results[i].username;
+        var username = results[i].username || "Guest";
         var roomname = results[i].roomname;
-        $('#chats').append('<div class="chat"><p class="username">' + message.username + '</p>' + $message); 
+        var timeStamp = results[i].createdAt;
+        $('#chats').append('<div class="col-md-12 chat"><span class="username">' + username + '</span><span class="timeStamp">' + timeStamp + '</span><p class="msg">' + $message + '</p>');
       }
 };
 
@@ -105,8 +92,14 @@ app.fetch = function() {
     app.addMessage(results);
   });
 
-
+  // setTimeout(app.fetch.bind(this), 5000);
 
 };
+
+app.refresh = function () {
+  $('#chats').fadeOut(100)empty();
+  app.fetch();
+  setTimeout(app.refresh.bind(this), 10000);
+}
 
 app.init();
