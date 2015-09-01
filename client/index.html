@@ -9,9 +9,9 @@
     <!-- dependencies -->
     <script src="bower_components/jquery/dist/jquery.js"></script>
     <script src="bower_components/underscore/underscore-min.js"></script>
+    <script src="bower_components/backbone/backbone.js"></script>
+
     <!-- your scripts -->
-    <script src="env/config.js"></script>
-    <script src="scripts/app.js"></script>
   </head>
   <body>
     <div class="container">
@@ -54,6 +54,21 @@
           </form>
         </div>
       </div>
+      <div class="row">
+        <div class="chats">
+
+        </div>
+      </div>
     </div>
+
+    <script id="chatTemplate" type="text/template">
+      <ul>
+          <li><%= message %></li>
+          <li><%= username %></li>
+          <li><%= roomname %></li>
+      </ul>
+    </script>
+    <script src="env/config.js"></script>
+    <script src="scripts/newApp.js"></script>
   </body>
 </html>
