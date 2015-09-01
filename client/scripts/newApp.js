@@ -19,7 +19,8 @@ app.Chat = Backbone.Model.extend({
 });
 
 app.Chats = Backbone.Collection.extend({
-  model: app.Chat
+  model: app.Chat,
+  url: 'https://api.parse.com/1/classes/chatterbox'
 });
 
 
@@ -42,8 +43,13 @@ app.ChatsView = Backbone.View.extend({
   el: 'body',
 
   initialize: function (chats) {
-    this.collection = new app.Chats(chats);
+    this.collection = new app.Chats();
+    this.collection.fetch({reset: true});
+    console.log(this.collection);
     this.render();
+
+    this.listenTo( this.collection, 'add', this.renderChat);
+    this.listenTo( this.collection, 'reset', this.render );
   },
   render: function () {
     this.collection.each(function (item) {
