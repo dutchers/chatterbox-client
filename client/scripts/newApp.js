@@ -1,18 +1,9 @@
 var app = app || {};
 
 app.Chat = Backbone.Model.extend({
-  // initialize: function (message, username, roomname) {
-  //   console.log("Model has been initialized.");
-  //   this.set('message', message);
-  //   this.set('username', username);
-  //   this.set('roomname', roomname);
-  //   // console.log(this.get('message') + ' from ' + this.get('username'));
-  //   this.on('change', function (e) {
-  //     console.log(e.changed);
-  //   });
-  // }
+  url: 'https://api.parse.com/1/classes/chatterbox',
   defaults: {
-    message: 'Hello',
+    text: 'Hello',
     username: 'Guest',
     roomname: 'Lobby'
   }
@@ -20,7 +11,44 @@ app.Chat = Backbone.Model.extend({
 
 app.Chats = Backbone.Collection.extend({
   model: app.Chat,
-  url: 'https://api.parse.com/1/classes/chatterbox'
+  url: 'https://api.parse.com/1/classes/chatterbox',
+
+  loadMsgs: function () {
+    this.fetch();
+  },
+
+  parse: function (res, options) {
+    var results = [];
+    for (var i = res.results.length - 1; i >= 0; i--) {
+      results.push(res.results[i]);
+    }
+    return results;
+  }
+
+});
+
+app.FormView = Backbone.View.extend({
+
+  el: 'thing',
+
+  // initialize: function () {
+  // //   this.collection.on('sync', this.stopSpinner, this);
+  // // },
+
+  events: {
+    'click #send': 'handleSubmit'
+  },
+
+  handleSubmit: function (e) {
+    e.preventDefault();
+    var $text = this.$('#message');
+    this.collection.create({
+      username: window.location.search.slice(10),
+      text: $text.val()
+    });
+    $text.val('');
+  },
+
 });
 
 
@@ -30,38 +58,32 @@ app.ChatView = Backbone.View.extend({
 
   template: _.template($('#chatTemplate').html()),
 
+  initialize: function(){
+   this.model.on('change', this.render, this); 
+  },
 
   render: function () {
     this.$el.html( this.template( this.model.attributes ) );
-    // console.log("this should render");
-    return this;
+    return this.$el;
   }
 
 });
 
 app.ChatsView = Backbone.View.extend({
-  el: 'body',
-
-  initialize: function (chats) {
-    this.collection = new app.Chats();
-    this.collection.fetch({reset: true});
-    console.log(this.collection);
-    this.render();
-
-    this.listenTo( this.collection, 'add', this.renderChat);
-    this.listenTo( this.collection, 'reset', this.render );
+  el: '#chats',
+  initialize: function () {
+    this.collection.on('sync', this.render, this);  
   },
+
   render: function () {
-    this.collection.each(function (item) {
-      this.renderChat(item);
-    }, this);
+    this.collection.forEach(this.renderChat, this);
   },
 
   renderChat: function (item) {
     var chatView = new app.ChatView({
       model: item
     });
-    this.$el.append(chatView.render().el);
+    this.$el.prepend(chatView.render());
   }
 });
 
@@ -69,22 +91,9 @@ app.ChatsView = Backbone.View.extend({
 
 
 $(function () {
-  var chats = [{
-    message: 'Hello',
-    username: 'Alex',
-    roomname: 'Lobby'
-  }, {
-    message: 'Hola',
-    username: 'Alex',
-    roomname: 'Lobby'
-  }, {
-    message: 'Bonjour',
-    username: 'Alex',
-    roomname: 'Lobby'
-  }, {
-    message: 'Kon\'nichiwa',
-    username: 'Alex',
-    roomname: 'Lobby'
-  } ];
-  new app.ChatsView(chats);
+  var messages = new app.Chats();
+  var formView = new app.FormView({ collection: messages });
+  var messagesView = new app.ChatsView({ collection: messages });
+  setInterval(messages.loadMsgs.bind(messages), 1000);
+  messages.loadMsgs();
 });

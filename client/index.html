@@ -47,9 +47,9 @@
       <div class="row">
         <div class="col-md-8 col-md-offset-2 chat-box">
           <form class="form-inline">
-            <div class="form-group">
+            <div class="form-group thing">
               <input type="text" class="form-control" id="message" placeholder="hola!" />
-              <button type="submit" class="btn btn-default" id="send">send</button>
+              <button class="btn btn-default" id="send">send</button>
             </div>
           </form>
         </div>
@@ -62,10 +62,9 @@
     </div>
 
     <script id="chatTemplate" type="text/template">
-      <ul>
-          <li><%= message %></li>
-          <li><%= username %></li>
-          <li><%= roomname %></li>
+      <ul class="chat">
+          <li><span class="username"><%- username %></span><span class="timeStamp pull-right"><%- createdAt %></span></li>
+          <li><span class="msg"><%- text %></span></li>
       </ul>
     </script>
     <script src="env/config.js"></script>
